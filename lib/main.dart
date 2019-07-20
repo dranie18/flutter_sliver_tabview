@@ -40,6 +40,7 @@ class _SilverAppBarWithTabBarState extends State<SilverAppBarWithTabBarScreen> w
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
+        physics: BouncingScrollPhysics(),
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverOverlapAbsorber(
@@ -68,15 +69,38 @@ class _SilverAppBarWithTabBarState extends State<SilverAppBarWithTabBarScreen> w
                 ),
               ),
             ),
-            SliverPersistentHeader(
-              delegate: _SliverAppBarDelegate(),
-              pinned: false,
-            ),
+//            SliverPersistentHeader(
+//              delegate: _SliverAppBarDelegate(),
+//              pinned: false,
+//            ),
           ];
         },
         body: Container(
           child: Column(
             children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Card(
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                    ),
+                  ),
+                  Card(
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                    ),
+                  ),
+                  Card(
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                    ),
+                  ),
+                ],
+              ),
               TabBar(
                 controller: controller,
                 labelColor: Colors.black87,
@@ -115,6 +139,7 @@ class _TabViewListState extends State<TabViewList> {
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
+        primary: true,
         itemCount: 2,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
@@ -126,31 +151,5 @@ class _TabViewListState extends State<TabViewList> {
         },
       ),
     );
-  }
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  double get minExtent => 110;
-  @override
-  double get maxExtent => 110;
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Column(
-      children: <Widget>[
-        Card(
-          child: Container(
-            width: 100,
-            height: 100,
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
   }
 }
